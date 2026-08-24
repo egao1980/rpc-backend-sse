@@ -3,7 +3,7 @@
   :description "SSE JSON-RPC transport for rpc-protocol"
   :author "egao1980"
   :license "MIT"
-  :depends-on ("rpc-protocol" "sse-protocol")
+  :depends-on ("rpc-protocol" "sse-protocol" "sse-backend-clack" "babel")
   :serial t
   :pathname "src"
   :components ((:file "package")
@@ -11,7 +11,12 @@
   :in-order-to ((test-op (test-op "rpc-backend-sse/tests"))))
 
 (defsystem "rpc-backend-sse/tests"
-  :depends-on ("rpc-backend-sse" "rove")
+  :depends-on ("rpc-backend-sse"
+               "sse-backend-http"
+               "http-server-backend-hunchentoot"
+               "http-backend-dexador"
+               "rove"
+               "usocket")
   :pathname "tests"
   :serial t
   :components ((:file "package")
