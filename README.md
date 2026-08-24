@@ -6,7 +6,14 @@ Part of [cl-stack](https://github.com/egao1980/cl-stack) agent-wire ([brief](htt
 
 ```lisp
 (asdf:load-system "rpc-backend-sse")
+
+;; POST JSON-RPC, reply is one SSE data: event
+(rpc-protocol:rpc-call "echo" "hi"
+  :transport (rpc-backend-sse:make-sse-rpc-transport
+              :url "http://127.0.0.1:8080/rpc"))
 ```
+
+`sbcl --load scripts/live-sse-rpc.lisp`
 
 CI: `setup-client` + `setup-roswell` + `scripts/ci-install.lisp` / `ci-test.lisp` (OCI only, no Quicklisp).
 
