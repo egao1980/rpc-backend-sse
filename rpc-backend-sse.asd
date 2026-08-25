@@ -1,9 +1,9 @@
 (defsystem "rpc-backend-sse"
-  :version "0.1.0"
+  :version "0.1.1"
   :description "SSE JSON-RPC transport for rpc-protocol"
   :author "egao1980"
   :license "MIT"
-  :depends-on ("rpc-protocol" "sse-protocol" "sse-backend-clack" "babel")
+  :depends-on ("rpc-protocol" "rpc-protocol-json" "sse-protocol" "sse-backend-clack" "babel")
   :serial t
   :pathname "src"
   :components ((:file "package")
