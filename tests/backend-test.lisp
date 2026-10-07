@@ -29,8 +29,10 @@
                     :path-info "/rpc"
                     :raw-body body
                     :headers (make-hash-table :test 'equal)))
-         (res (funcall app env))
-         (wire (apply #'concatenate 'string (third res)))
+         ;; sse-backend-clack >= 0.1.1 returns a Clack streaming function;
+         ;; call-sse-app drives it and yields (status headers wire-string).
+         (res (sse-backend-clack:call-sse-app app env))
+         (wire (third res))
          (evs (with-input-from-string (in wire)
                 (sse-protocol:collect-sse-events in)))
          (msg (rpc-protocol:decode-message
